@@ -10,6 +10,7 @@ import java.util.Comparator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -23,12 +24,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 @SuppressWarnings("unused")
 public class ListController {
 
 	@FXML ListView<String> listView;                
 	@FXML Button addSongButton;
+	@FXML Button editSongButton;
+	@FXML Button deleteSongButton;
 	private ObservableList<String> obsList;    
 	Song song1 = new Song("Cyber Sex", "Doja Cat", "dontknow", "2019");
 	ArrayList<Song> songArrayList = new ArrayList<Song>();
@@ -104,6 +108,28 @@ public class ListController {
 		.addListener(
 				(obs, oldVal, newVal) -> 
 				showSong(mainStage));
+		
+		mainStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
+			public void handle(WindowEvent we) {
+		          System.out.println("Stage is closing");
+					try {
+						FileWriter fw = new FileWriter("songData.txt",false);
+						for(int i=0; i < songArrayList.size(); i++) {
+							
+							fw.write(songArrayList.get(i).getName() + ", " + songArrayList.get(i).getArtist() + ", "
+									+ songArrayList.get(i).getAlbum() + ", " + songArrayList.get(i).getYear() + "\n");
+
+						}
+						fw.close();
+					}
+						catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+		          
+		          }
+		      });
 
 	}
 	// The showSong method uses the Alert object to show the songs name, Artist, album, and year.
@@ -140,64 +166,85 @@ public class ListController {
 		if (result.isPresent()) { obsList.set(index, result.get()); }
 	}
 	
-	//this will take the action of the addSong button
-	public void buttonEvent(ActionEvent e) throws IOException {
-		Button b = (Button)e.getSource();
-		if (b == addSongButton)
-		{
-			TextInputDialog dialog = new TextInputDialog();
-			dialog.setHeaderText("Please enter your new sonng, you MUST enter a song name and Artist, "
-					+ "but album name and year are optional");
-			dialog.setResizable(true);
-			Label songnamelabel = new Label("Enter song name: ");
-			Label artistnamelabel = new Label("Enter artist name: ");
-			Label albumlabel = new Label("(OPTIONAL)Enter album name: ");
-			Label yearlabel = new Label("(OPTIONAL)Enter song year: ");
-			TextField songtext = new TextField();
-			TextField artisttext = new TextField();
-			TextField albumtext = new TextField();
-			TextField yeartext = new TextField();
+	//this will take the action of the addSong, editsong, deletesongbutton
+		public void buttonEvent(ActionEvent e) throws IOException {
+			Button b = (Button)e.getSource();
+			if (b == addSongButton)
+			{
+				TextInputDialog dialog = new TextInputDialog();
+				dialog.setHeaderText("Please enter your new sonng, you MUST enter a song name and Artist, "
+						+ "but album name and year are optional");
+				dialog.setResizable(true);
+				Label songnamelabel = new Label("Enter song name: ");
+				Label artistnamelabel = new Label("Enter artist name: ");
+				Label albumlabel = new Label("(OPTIONAL)Enter album name: ");
+				Label yearlabel = new Label("(OPTIONAL)Enter song year: ");
+				TextField songtext = new TextField();
+				TextField artisttext = new TextField();
+				TextField albumtext = new TextField();
+				TextField yeartext = new TextField();
 
-			GridPane grid = new GridPane();
-			grid.add(songnamelabel, 1, 1);
-			grid.add(songtext, 2, 1);
-			grid.add(artistnamelabel, 1, 2);
-			grid.add(artisttext, 2, 2);
-			grid.add(albumlabel, 1, 3);
-			grid.add(albumtext, 2, 3);
-			grid.add(yearlabel, 1, 4);
-			grid.add(yeartext, 2, 4);
-			dialog.getDialogPane().setContent(grid);
-			
-			
-			
-			// The optional object shows a pop up window for our dialog. We check to see if the button was pressed with isPresent(). From there
-			// we create a new Song with our inputs. and then we add it to the obsList with .add, casting our objects to string.
-			Optional<String> result = dialog.showAndWait();
-			if (result.isPresent()){
-				Song addedSong = new Song(songtext.getText(), artisttext.getText(), albumtext.getText(), yeartext.getText());
-				songArrayList.add(addedSong);
-				obsList.add(addedSong.getName() + " , " + addedSong.getArtist());
-				FileWriter fw = new FileWriter("songData.txt", true);
-				fw.write(addedSong.getName() + ", " + addedSong.getArtist() + ", " + addedSong.getAlbum() + " , " + addedSong.getYear() + "\n");
-				fw.close();
+				GridPane grid = new GridPane();
+				grid.add(songnamelabel, 1, 1);
+				grid.add(songtext, 2, 1);
+				grid.add(artistnamelabel, 1, 2);
+				grid.add(artisttext, 2, 2);
+				grid.add(albumlabel, 1, 3);
+				grid.add(albumtext, 2, 3);
+				grid.add(yearlabel, 1, 4);
+				grid.add(yeartext, 2, 4);
+				dialog.getDialogPane().setContent(grid);
+				
+				
+				
+				// The optional object shows a pop up window for our dialog. We check to see if the button was pressed with isPresent(). From there
+				// we create a new Song with our inputs. and then we add it to the obsList with .add, casting our objects to string.
+				Optional<String> result = dialog.showAndWait();
+				if (result.isPresent()){
+					Song addedSong = new Song(songtext.getText(), artisttext.getText(), albumtext.getText(), yeartext.getText());
+					songArrayList.add(addedSong);
+					obsList.add(addedSong.getName() + " , " + addedSong.getArtist());
+					FileWriter fw = new FileWriter("songData.txt", true);
+					fw.write(addedSong.getName() + ", " + addedSong.getArtist() + ", " + addedSong.getAlbum() + " , " + addedSong.getYear() + "\n");
+					fw.close();
+				}
 			}
-			
+			else if (b == deleteSongButton)
+			{
+				int index = listView.getSelectionModel().getSelectedIndex();
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Delete Song?");
+				String message = "Are you sure you want to delete: " + (songArrayList.get(index).getName()) 
+						+ "by " + (songArrayList.get(index).getArtist());
+				
+				Optional<ButtonType> result = alert.showAndWait();
+				if((result.isPresent()) && (result.get() == ButtonType.OK)) {
+					songArrayList.remove(index);
+					obsList.remove(index);
+					
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+			}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
 	}
-
-
-
-
-
-}
