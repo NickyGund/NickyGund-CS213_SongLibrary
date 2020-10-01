@@ -35,7 +35,7 @@ public class ListController {
 	@FXML Button editSongButton;
 	@FXML Button deleteSongButton;
 	private ObservableList<String> obsList;    
-	Song song1 = new Song("Cyber Sex", "Doja Cat", "dontknow", "2019");
+	//Song song1 = new Song("Cyber Sex", "Doja Cat", "dontknow", "2019");
 	ArrayList<Song> songArrayList = new ArrayList<Song>();
 		
 	
@@ -76,7 +76,7 @@ public class ListController {
 				
 				// create song object with above information
 				Song sg = new Song(name,artist,album,year);
-				System.out.println(sg.toString());
+				//System.out.println(sg.toString());
 				songArrayList.add(sg);
 				//restart for next iter
 				name ="";
@@ -87,12 +87,12 @@ public class ListController {
 			
 			reader.close();
 			
-			System.out.println(obsList.size());
+			//System.out.println(obsList.size());
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		songArrayList.add(song1);
+		//songArrayList.add(song1);
 		//sort arraylist(before obslist is populated
 		Collections.sort(songArrayList,Song.sgComparator);
 		for (int i = 0; i < songArrayList.size(); i++) {
@@ -207,7 +207,14 @@ public class ListController {
 				if (result.isPresent()){
 					Song addedSong = new Song(songtext.getText(), artisttext.getText(), albumtext.getText(), yeartext.getText());
 					songArrayList.add(addedSong);
-					obsList.add(addedSong.getName() + " , " + addedSong.getArtist());
+					Collections.sort(songArrayList,Song.sgComparator);
+					for (int i = 0; i < songArrayList.size(); i++) {
+						String songstring = (songArrayList.get(i).getName() + ", " + songArrayList.get(i).getArtist());
+						if (!songstring.equals(obsList.get(i))) {
+							obsList.add(i,songstring);
+						}
+					}
+
 					FileWriter fw = new FileWriter("songData.txt", true);
 					fw.write(addedSong.getName() + ", " + addedSong.getArtist() + ", " + addedSong.getAlbum() + " , " + addedSong.getYear() + "\n");
 					fw.close();

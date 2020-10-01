@@ -1,6 +1,7 @@
-example,example
-a,a,NA,NA
-bb,bb,NA,NA
-ba,ba,NA,NA
-c,c,NA,NA, , N/A , N/A
-new, yup, N/A , N/A
+a,         a,         NA,         NA
+ba,         ba,         NA,         NA
+bb,         bb,         NA,         NA
+c,         c,         N/A,         N/A
+Cyber,          Abot,          N/A ,          N/A
+Cyber,          Bot,          N/A ,          N/A
+z,  z,  N/A,  N/A
