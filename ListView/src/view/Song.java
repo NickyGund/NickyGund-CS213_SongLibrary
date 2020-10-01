@@ -60,22 +60,19 @@ public class Song{
 	//--------------------------------------------------------------------------------------------------
 	// Comparator for sorting the list for Song methods
 	//--------------------------------------------------------------------------------------------------
-	// sort by song name
-	public Comparator<Song> sgNmeComparator =new Comparator<Song>() {
+	// sort by song name, then artist if song names are equal
+	public static Comparator<Song> sgComparator =new Comparator<Song>() {
 		public int compare(Song s1,Song s2) {
 			String songName1 = s1.getName().toUpperCase();
 			String songName2 = s2.getName().toUpperCase();
-			
-			return songName1.compareTo(songName2);
+			int compare = songName1.compareTo(songName2);
+			if (compare==0) {
+				String songArtist1 = s1.getArtist().toUpperCase();
+				String songArtist2 = s2.getArtist().toUpperCase();
+				return songArtist1.compareTo(songArtist2);
+			}
+			return compare;
 		}
 	};
-	// sort by artist
-	public Comparator<Song> sgArtComparator =new Comparator<Song>() {
-		public int compare(Song s1,Song s2) {
-			String songArtist1 = s1.getName().toUpperCase();
-			String songArtist2 = s2.getName().toUpperCase();
-			
-			return songArtist1.compareTo(songArtist2);
-		}
-	};
+	
 }
