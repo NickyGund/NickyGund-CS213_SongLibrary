@@ -1,6 +1,7 @@
 package view;
+import java.util.Comparator;
 	//recreated this class because I accidentally deleted the old one ;)
-public class Song {
+public class Song{
 	// Private to prevent accidental access
 	private String name;
 	private String artist;
@@ -56,4 +57,25 @@ public class Song {
 	public String getYear() {
 		return year;
 	}
+	//--------------------------------------------------------------------------------------------------
+	// Comparator for sorting the list for Song methods
+	//--------------------------------------------------------------------------------------------------
+	// sort by song name
+	public Comparator<Song> sgNmeComparator =new Comparator<Song>() {
+		public int compare(Song s1,Song s2) {
+			String songName1 = s1.getName().toUpperCase();
+			String songName2 = s2.getName().toUpperCase();
+			
+			return songName1.compareTo(songName2);
+		}
+	};
+	// sort by artist
+	public Comparator<Song> sgArtComparator =new Comparator<Song>() {
+		public int compare(Song s1,Song s2) {
+			String songArtist1 = s1.getName().toUpperCase();
+			String songArtist2 = s2.getName().toUpperCase();
+			
+			return songArtist1.compareTo(songArtist2);
+		}
+	};
 }

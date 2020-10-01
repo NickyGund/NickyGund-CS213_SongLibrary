@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Comparator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +24,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+@SuppressWarnings("unused")
 public class ListController {
 
 	@FXML ListView<String> listView;                
@@ -123,6 +125,7 @@ public class ListController {
 
 		alert.setContentText(content);
 		alert.showAndWait();
+	}
 	
 	private void showItemInputDialog(Stage mainStage) {                
 		String item = listView.getSelectionModel().getSelectedItem();
