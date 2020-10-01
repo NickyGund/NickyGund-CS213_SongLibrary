@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.Comparator;
 
@@ -88,10 +89,13 @@ public class ListController {
 			e.printStackTrace();
 		}
 		songArrayList.add(song1);
+		//sort arraylist(before obslist is populated
+		Collections.sort(songArrayList,Song.sgComparator);
 		for (int i = 0; i < songArrayList.size(); i++) {
 			String songstring = (songArrayList.get(i).getName() + ", " + songArrayList.get(i).getArtist());
 			obsList.add(songstring);
 		}
+		
 		listView.setItems(obsList); 
 
 		// select the first item
