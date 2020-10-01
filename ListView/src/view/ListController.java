@@ -101,27 +101,28 @@ public class ListController {
 		.selectedIndexProperty()
 		.addListener(
 				(obs, oldVal, newVal) -> 
-				showItemInputDialog(mainStage));
+				showSong(mainStage));
 
 	}
-	
-	private void showItem(Stage mainStage) {                
+	// The showSong method uses the Alert object to show the songs name, Artist, album, and year.
+	//
+	private void showSong(Stage mainStage) {                
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.initOwner(mainStage);
-		alert.setTitle("List Item");
+		alert.setTitle("Song Info");
 		alert.setHeaderText(
-				"Selected list item properties");
+				"Selected song properties");
 
-		String content = "Index: " + 
-				listView.getSelectionModel()
-		.getSelectedIndex() + 
-		"\nValue: " + 
-		listView.getSelectionModel()
-		.getSelectedItem();
+		int index = listView.getSelectionModel().getSelectedIndex();
+		
+		String content = "Songname: " + 
+				(songArrayList.get(index).getName()) + 
+		"\nArtist: " + (songArrayList.get(index).getArtist()) +
+		"\nAlbum: " + (songArrayList.get(index).getAlbum()) +
+		"\nYear: " + (songArrayList.get(index).getYear());
 
 		alert.setContentText(content);
 		alert.showAndWait();
-	}
 	
 	private void showItemInputDialog(Stage mainStage) {                
 		String item = listView.getSelectionModel().getSelectedItem();
