@@ -246,28 +246,55 @@ public class ListController {
 				else {
 					//BUT HOW?!
 				}
+			}
+
+			else if(b == editSongButton)
+			{
+			
+			int editindex = listView.getSelectionModel().getSelectedIndex();
+			String song = listView.getSelectionModel().getSelectedItem();
+			
+			TextInputDialog editdialog = new TextInputDialog();
+			editdialog.setHeaderText("Please change anything you like, remember - you MUST enter a song name and Artist");
+			editdialog.setResizable(true);
+			Label songnamelabel = new Label("change song name:  " + songArrayList.get(editindex).getName());
+			Label artistnamelabel = new Label("change artists name: " + songArrayList.get(editindex).getArtist());
+			Label albumlabel = new Label("(OPTIONAL)change album name: " + songArrayList.get(editindex).getAlbum());
+			Label yearlabel = new Label("(OPTIONAL)change song year: " + songArrayList.get(editindex).getYear());
+			TextField songtext = new TextField();
+			TextField artisttext = new TextField();
+			TextField albumtext = new TextField();
+			TextField yeartext = new TextField();
+
+			GridPane grid2 = new GridPane();
+			grid2.add(songnamelabel, 1, 1);
+			grid2.add(songtext, 2, 1);
+			grid2.add(artistnamelabel, 1, 2);
+			grid2.add(artisttext, 2, 2);
+			grid2.add(albumlabel, 1, 3);
+			grid2.add(albumtext, 2, 3);
+			grid2.add(yearlabel, 1, 4);
+			grid2.add(yeartext, 2, 4);
+			editdialog.getDialogPane().setContent(grid2);
+			
+			
+			Optional<String> editresult = editdialog.showAndWait();
+			if(editresult.isPresent()) {
+				Song changedSong = new Song(songtext.getText(), artisttext.getText(), albumtext.getText(), yeartext.getText());
+				songArrayList.set(editindex, changedSong);
+				obsList.set(editindex, (songArrayList.get(editindex).getName() + ", " + songArrayList.get(editindex).getArtist()));
 				
-				
-				
-				
-				
-				
+			}
+			}
 				
 				
 			}
 		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		}
 
 
 
 
 
-	}
+	
