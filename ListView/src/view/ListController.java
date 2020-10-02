@@ -234,6 +234,18 @@ public class ListController {
 					obsList.remove(index);
 					
 				}
+				//select next song as default if there is one
+				if(songArrayList.size()>0 && songArrayList.size()-1 == index-1) {
+					listView.getSelectionModel().select(index-1);
+				}
+				//otherwise select previous
+				else if(songArrayList.size()>0) {
+					listView.getSelectionModel().select(index);
+				}
+				//if it's empty list prevent selection
+				else {
+					//BUT HOW?!
+				}
 				
 				
 				
