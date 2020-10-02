@@ -50,7 +50,7 @@ public class ListController {
 		// create an ObservableList 
 		// from an ArrayList  
 		// In this case our observable ArrayList is empty, and we will populate it from the songArrayList
-		obsList = FXCollections.observableArrayList("");
+		obsList = FXCollections.observableArrayList();
 		
 		try {
 			FileReader reader = new FileReader(
@@ -184,9 +184,11 @@ public class ListController {
 		if (result.isPresent()) { obsList.set(index, result.get()); }
 	}
 	
-	//this will take the action of the addSong, editsong, deletesongbutton
+	//this will take the action of the addSong, editsong, deletesongbutton.
 		public void buttonEvent(ActionEvent e) throws IOException {
 			Button b = (Button)e.getSource();
+			//The button clicked is the @FXMLaddSongButton. We make a dialog bog that is a textinputdialog, set a header, our 4 labels, and our 
+			//4 text fields. We add this to a grid and then set the contents to the crid. If the user clicks yes
 			if (b == addSongButton)
 			{
 				TextInputDialog dialog = new TextInputDialog();
