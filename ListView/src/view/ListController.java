@@ -1,3 +1,10 @@
+// Sai Nayan Malladi srm275
+// Nicolas Gundersen neg62
+// CS 213 Software Methodology 
+// Sesh
+
+// The ListController class adds as the 'controller' between our model(the fxml file), and our ListApp. Our Listcontroller contains all of our main
+// functions.
 package view;
 
 import java.io.FileReader;
@@ -29,13 +36,13 @@ import javafx.stage.WindowEvent;
 
 @SuppressWarnings("unused")
 public class ListController {
-
+	//Initialize our buttons from our fxml. These variables point to the fx:id on the fxml.
+	// Also initialize our ListView, ObservableList, and our ArrayList(Song)
 	@FXML ListView<String> listView;                
 	@FXML Button addSongButton;
 	@FXML Button editSongButton;
 	@FXML Button deleteSongButton;
 	private ObservableList<String> obsList;    
-	//Song song1 = new Song("Cyber Sex", "Doja Cat", "dontknow", "2019");
 	ArrayList<Song> songArrayList = new ArrayList<Song>();
 		
 	
@@ -43,7 +50,8 @@ public class ListController {
 		// create an ObservableList 
 		// from an ArrayList  
 		// In this case our observable ArrayList is empty, and we will populate it from the songArrayList
-		obsList = FXCollections.observableArrayList();
+		obsList = FXCollections.observableArrayList("");
+		
 		try {
 			FileReader reader = new FileReader(
 				"songData.txt");
@@ -92,7 +100,7 @@ public class ListController {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		//songArrayList.add(song1);
+
 		//sort arraylist(before obslist is populated
 		Collections.sort(songArrayList,Song.sgComparator);
 		for (int i = 0; i < songArrayList.size(); i++) {
@@ -216,7 +224,7 @@ public class ListController {
 					}
 
 					FileWriter fw = new FileWriter("songData.txt", true);
-					fw.write(addedSong.getName() + ", " + addedSong.getArtist() + ", " + addedSong.getAlbum() + " , " + addedSong.getYear() + "\n");
+					fw.write(addedSong.getName() + ", " + addedSong.getArtist() + ", " + addedSong.getAlbum() + ", " + addedSong.getYear() + "\n");
 					fw.close();
 				}
 			}
@@ -226,7 +234,8 @@ public class ListController {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("Delete Song?");
 				String message = "Are you sure you want to delete: " + (songArrayList.get(index).getName()) 
-						+ "by " + (songArrayList.get(index).getArtist());
+						+ " by " + (songArrayList.get(index).getArtist());
+				alert.setContentText(message);
 				
 				Optional<ButtonType> result = alert.showAndWait();
 				if((result.isPresent()) && (result.get() == ButtonType.OK)) {
