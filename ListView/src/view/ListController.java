@@ -55,6 +55,10 @@ public class ListController {
 		try {
 			FileReader reader = new FileReader(
 				"songData.txt");
+			if(reader==null) {
+				System.out.println("Error: no songData.txt file found");
+				System.out.println("songData.txt must be in the project folder");
+			}
 			int chara;
 			String stream ="";
 			String name ="";
@@ -66,6 +70,8 @@ public class ListController {
 			while ((chara = reader.read()) != -1) {
 				stream+=(char)chara;
 			}
+			if (!stream.equals("")) {
+				
 			//split into array of song's information
 			String[] tokens = stream.split("\n");
 			for(int i=0;i< tokens.length;i++) {
@@ -94,7 +100,7 @@ public class ListController {
 			}
 			
 			reader.close();
-			
+			}
 			//System.out.println(obsList.size());
 		}
 		catch (IOException e) {
