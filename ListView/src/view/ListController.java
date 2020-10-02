@@ -283,16 +283,18 @@ public class ListController {
 			if(editresult.isPresent()) {
 				Song changedSong = new Song(songtext.getText(), artisttext.getText(), albumtext.getText(), yeartext.getText());
 				songArrayList.set(editindex, changedSong);
-				obsList.set(editindex, (songArrayList.get(editindex).getName() + ", " + songArrayList.get(editindex).getArtist()));
-				
-			}
+				//sort after edit is complete
+				Collections.sort(songArrayList,Song.sgComparator);
+				for (int i = 0; i < songArrayList.size(); i++) {
+					obsList.set(i, songArrayList.get(i).getName() + ", " + songArrayList.get(i).getArtist());
+				}
 			}
 				
 				
 			}
 		
-
 		}
+	}
 
 
 

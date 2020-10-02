@@ -1,4 +1,2 @@
-a,          a,          NA,          NA
-ba,          ba,          NA,          NA
-bb,          bb,          NA,          NA
-Cyber,           Abot,           N/A ,           N/A
+a,               a,               NA,               NA
+name,  AAbot,  N/A,  N/A
