@@ -267,14 +267,14 @@ public class ListController {
 			TextInputDialog editdialog = new TextInputDialog();
 			editdialog.setHeaderText("Please change anything you like, remember - you MUST enter a song name and Artist");
 			editdialog.setResizable(true);
-			Label songnamelabel = new Label("change song name:  " + songArrayList.get(editindex).getName());
-			Label artistnamelabel = new Label("change artists name: " + songArrayList.get(editindex).getArtist());
-			Label albumlabel = new Label("(OPTIONAL)change album name: " + songArrayList.get(editindex).getAlbum());
-			Label yearlabel = new Label("(OPTIONAL)change song year: " + songArrayList.get(editindex).getYear());
-			TextField songtext = new TextField();
-			TextField artisttext = new TextField();
-			TextField albumtext = new TextField();
-			TextField yeartext = new TextField();
+			Label songnamelabel = new Label("change song name:  ");
+			Label artistnamelabel = new Label("change artists name: ");
+			Label albumlabel = new Label("(OPTIONAL)change album name: ");
+			Label yearlabel = new Label("(OPTIONAL)change song year: ");
+			TextField songtext = new TextField(songArrayList.get(editindex).getName());
+			TextField artisttext = new TextField(songArrayList.get(editindex).getArtist());
+			TextField albumtext = new TextField(songArrayList.get(editindex).getAlbum());
+			TextField yeartext = new TextField(songArrayList.get(editindex).getYear());;
 
 			GridPane grid2 = new GridPane();
 			grid2.add(songnamelabel, 1, 1);
