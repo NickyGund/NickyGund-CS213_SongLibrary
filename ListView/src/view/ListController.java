@@ -246,6 +246,7 @@ public class ListController {
 				else {
 					//BUT HOW?!
 				}
+				
 			}
 
 			else if(b == editSongButton)
