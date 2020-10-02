@@ -76,7 +76,7 @@ public class ListController {
 			String[] tokens = stream.split("\n");
 			for(int i=0;i< tokens.length;i++) {
 				//split up info within songs
-				String[] info = tokens[i].split(",");
+				String[] info = tokens[i].split(", ");
 				
 				name = info[0];
 				artist = info[1];
@@ -231,9 +231,9 @@ public class ListController {
 						}
 					}
 
-					FileWriter fw = new FileWriter("songData.txt", true);
-					fw.write(addedSong.getName() + ", " + addedSong.getArtist() + ", " + addedSong.getAlbum() + ", " + addedSong.getYear() + "\n");
-					fw.close();
+					//FileWriter fw = new FileWriter("songData.txt", true);
+					//fw.write(addedSong.getName() + ", " + addedSong.getArtist() + ", " + addedSong.getAlbum() + ", " + addedSong.getYear() + "\n");
+					//fw.close();
 				}
 			}
 			else if (b == deleteSongButton)
