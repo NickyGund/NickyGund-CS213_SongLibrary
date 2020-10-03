@@ -1,2 +1,0 @@
-a,               a,               NA,               NA
-name,  AAbot,  N/A,  N/A

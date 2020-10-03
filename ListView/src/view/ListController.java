@@ -243,32 +243,42 @@ public class ListController {
 			}
 			else if (b == deleteSongButton)
 			{
-				int index = listView.getSelectionModel().getSelectedIndex();
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Delete Song?");
-				String message = "Are you sure you want to delete: " + (songArrayList.get(index).getName()) 
-						+ " by " + (songArrayList.get(index).getArtist());
-				alert.setContentText(message);
-				
-				Optional<ButtonType> result = alert.showAndWait();
-				if((result.isPresent()) && (result.get() == ButtonType.OK)) {
-					songArrayList.remove(index);
-					obsList.remove(index);
+				//output error window
+				if(songArrayList.size()==0) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("No Songs in list");
+				}
+				// if there's only one song to delete
+				/*else if(songArrayList.size()==1){
 					
-				}
-				//select next song as default if there is one
-				if(songArrayList.size()>0 && songArrayList.size()-1 == index-1) {
-					listView.getSelectionModel().select(index-1);
-				}
-				//otherwise select previous
-				else if(songArrayList.size()>0) {
-					listView.getSelectionModel().select(index);
-				}
-				//if it's empty list prevent selection
+				}*/
 				else {
-					//BUT HOW?!
-				}
+					int index = listView.getSelectionModel().getSelectedIndex();
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("Delete Song?");
+					String message = "Are you sure you want to delete: " + (songArrayList.get(index).getName()) 
+						+ " by " + (songArrayList.get(index).getArtist());
+					alert.setContentText(message);
 				
+					Optional<ButtonType> result = alert.showAndWait();
+					if((result.isPresent()) && (result.get() == ButtonType.OK)) {
+						songArrayList.remove(index);
+						obsList.remove(index);
+					
+					}
+					//select next song as default if there is one
+					if(songArrayList.size()>0 && songArrayList.size()-1 == index-1) {
+						listView.getSelectionModel().select(index-1);
+					}
+					//otherwise select previous
+					else if(songArrayList.size()>0) {
+						listView.getSelectionModel().select(index);
+					}
+					//if it's empty list prevent selection
+					else {
+						
+					}
+				}
 			}
 
 			else if(b == editSongButton)
