@@ -1,3 +1,7 @@
+// Sai Nayan Malladi srm275
+// Nicolas Gundersen neg62
+// CS 213 Software Methodology 
+// Sesh
 package view;
 import java.util.Comparator;
 	//recreated this class because I accidentally deleted the old one ;)
