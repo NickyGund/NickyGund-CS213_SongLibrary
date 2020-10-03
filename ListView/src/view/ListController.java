@@ -223,16 +223,11 @@ public class ListController {
 				if (result.isPresent()){
 					Song addedSong = new Song(songtext.getText(), artisttext.getText(), albumtext.getText(), yeartext.getText());
 					songArrayList.add(addedSong);
-					if(songArrayList.size()==1) {
-						obsList.add(addedSong.getName() + ", " + addedSong.getArtist());
-					}
-					else{
-						Collections.sort(songArrayList,Song.sgComparator);
-						for (int i = 0; i < songArrayList.size(); i++) {
-							String songstring = (songArrayList.get(i).getName() + ", " + songArrayList.get(i).getArtist());
-							if (!songstring.equals(obsList.get(i))) {
-								obsList.add(i,songstring);
-							}
+					Collections.sort(songArrayList,Song.sgComparator);
+					for (int i = 0; i < songArrayList.size(); i++) {
+						String songstring = (songArrayList.get(i).getName() + ", " + songArrayList.get(i).getArtist());
+						if (!songstring.equals(obsList.get(i))) {
+							obsList.add(i,songstring);
 						}
 					}
 
