@@ -222,15 +222,19 @@ public class ListController {
 				Optional<String> result = dialog.showAndWait();
 				if (result.isPresent()){
 					Song addedSong = new Song(songtext.getText(), artisttext.getText(), albumtext.getText(), yeartext.getText());
+					if(songArrayList.size()==0) {
+						songArrayList.add(addedSong);
+						obsList.add(addedSong.getName() + ", " + addedSong.getArtist());
+					}
+					else{
 					songArrayList.add(addedSong);
 					Collections.sort(songArrayList,Song.sgComparator);
 					for (int i = 0; i < songArrayList.size(); i++) {
-						String songstring = (songArrayList.get(i).getName() + ", " + songArrayList.get(i).getArtist());
-						if (!songstring.equals(obsList.get(i))) {
-							obsList.add(i,songstring);
-						}
+						obsList.add("");
+						obsList.set(i, songArrayList.get(i).getName() + ", " + songArrayList.get(i).getArtist());
 					}
-
+					}
+					
 					//FileWriter fw = new FileWriter("songData.txt", true);
 					//fw.write(addedSong.getName() + ", " + addedSong.getArtist() + ", " + addedSong.getAlbum() + ", " + addedSong.getYear() + "\n");
 					//fw.close();
